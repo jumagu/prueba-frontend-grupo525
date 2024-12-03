@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "css.lint.unknownAtRules": "ignore",
+  "angular-schematics.schematicsDefaultOptions": {
+    "angular-*": {
+      "externalTemplate": true,
+      "skipStyle": true
+    }
+  }
+}

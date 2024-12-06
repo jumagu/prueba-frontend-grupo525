@@ -1,0 +1,194 @@
+<div class="flex items-center justify-between mt-4 gap-3">
+  <div class="w-full lg:w-1/2 flex items-center gap-2">
+    <input
+      type="text"
+      hlmInput
+      placeholder="Filtre por cualquier columna..."
+      debouncedInput
+      (changeEvent)="onDeboucedInputChange($event)"
+      class="w-full"
+    />
+  </div>
+
+  <button hlmBtn variant="outline" align="end" [brnMenuTriggerFor]="menu">
+    Columnas
+    <hlm-icon name="lucideChevronDown" class="ml-2" size="sm" />
+  </button>
+  <ng-template #menu>
+    <hlm-menu class="w-auto">
+      @for (column of table.getAllColumns(); track column.id) {<!--  -->
+      @if (column.id !== 'select' && column.id !== 'actions') {
+      <label
+        hlmLabel
+        class="flex items-center gap-2 p-2 cursor-pointer hover:bg-accent rounded-sm"
+      >
+        <hlm-checkbox
+          [checked]="column.getIsVisible()"
+          (changed)="column.toggleVisibility($event)"
+          [disabled]="isColumnDisabled(column)"
+        />
+        <span>{{ headerTableComboVisibility()[column.id].title }}</span>
+      </label>
+      }<!--  -->
+      }
+    </hlm-menu>
+  </ng-template>
+</div>
+
+<hlm-table
+  hlmTable
+  class="w-full mt-4 block h-auto overflow-auto rounded-md border border-border"
+>
+  @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+  <hlm-trow>
+    @for (headerItem of headerGroup.headers; track headerItem.id) { @if
+    (!headerItem.isPlaceholder) {
+    <hlm-th class="text-base font-semibold w-48">
+      @if(headerItem.column.id === 'actions') {
+      <span class="w-10"></span>
+      } @else {
+      <ng-container
+        *flexRender="
+          headerItem.column.columnDef.header;
+          props: headerItem.getContext();
+          let header
+        "
+      >
+        <button
+          hlmBtn
+          variant="ghost"
+          class="p-0"
+          (click)="onSortingColumn(headerItem.column)"
+        >
+          <div [innerHTML]="header"></div>
+          <hlm-icon size="sm" name="lucideChevronsUpDown" class="ml-1" />
+        </button>
+      </ng-container>
+      }
+    </hlm-th>
+    } }
+  </hlm-trow>
+  }
+  <!--  -->
+  @for (row of table.getRowModel().rows; track row.id) {
+  <hlm-trow>
+    @for (cell of row.getVisibleCells(); track cell.id) {
+    <hlm-td class="w-48 truncate">
+      @if(cell.column.id === 'actions') {
+      <button
+        hlmBtn
+        align="end"
+        variant="ghost"
+        class="h-6 w-6 p-0.5"
+        [brnMenuTriggerFor]="menu"
+      >
+        <hlm-icon class="w-4 h-4" name="lucideEllipsis" />
+      </button>
+      <ng-template #menu>
+        <hlm-menu>
+          <hlm-menu-label>Acciones</hlm-menu-label>
+          <hlm-menu-separator />
+          <hlm-menu-group>
+            <button hlmMenuItem (click)="edit.emit(row.original)">Edit</button>
+          </hlm-menu-group>
+        </hlm-menu>
+      </ng-template>
+      } @else {
+      <ng-container
+        *flexRender="
+          cell.column.columnDef.cell;
+          props: cell.getContext();
+          let cell
+        "
+      >
+        <div [innerHTML]="cell"></div>
+      </ng-container>
+      }
+    </hlm-td>
+    }
+  </hlm-trow>
+  }
+</hlm-table>
+
+<div class="flex items-center justify-between">
+  <div>
+    <span class="text-sm text-muted-foreground">
+      Mostrar {{ table.getRowModel().rows.length }} de
+      {{ table.getRowCount() }}
+    </span>
+  </div>
+
+  <div class="flex items-center gap-2 mt-2">
+    <span class="text-sm text-muted-foreground">
+      {{ table.getState().pagination.pageIndex + 1 }}
+      de {{ table.getPageCount() }} Páginas
+    </span>
+
+    <brn-popover
+      [state]="stateCombobox()"
+      (stateChanged)="changeStateCombobox($event)"
+      sideOffset="5"
+      closeDelay="100"
+    >
+      <button
+        hlmBtn
+        brnPopoverTrigger
+        variant="outline"
+        class="w-20 justify-between"
+      >
+        {{ table.getState().pagination.pageSize }}
+        <hlm-icon size="sm" name="lucideChevronDown" />
+      </button>
+      <brn-cmd
+        hlm
+        hlmPopoverContent
+        *brnPopoverContent="let ctx"
+        class="p-0 w-20"
+      >
+        <brn-cmd-list hlm>
+          <brn-cmd-group hlm>
+            @for (size of pageSizes(); track size) {
+            <button
+              hlm
+              brnCmdItem
+              class="w-full"
+              [value]="size.toString()"
+              (selected)="onPageSizeChange(size)"
+              [ariaSelected]="size === table.getState().pagination.pageSize"
+            >
+              <hlm-icon
+                hlmCmdIcon
+                name="lucideCheck"
+                [ngClass]="{
+                  'opacity-0': size !== table.getState().pagination.pageSize
+                }"
+              />
+              {{ size }}
+            </button>
+
+            }
+          </brn-cmd-group>
+        </brn-cmd-list>
+      </brn-cmd>
+    </brn-popover>
+
+    <button
+      hlmBtn
+      size="sm"
+      variant="default"
+      [disabled]="!table.getCanPreviousPage()"
+      (click)="table.previousPage()"
+    >
+      Anterior
+    </button>
+    <button
+      hlmBtn
+      size="sm"
+      variant="default"
+      [disabled]="!table.getCanNextPage()"
+      (click)="table.nextPage()"
+    >
+      Siguiente
+    </button>
+  </div>
+</div>

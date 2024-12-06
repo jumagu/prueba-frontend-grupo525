@@ -1,0 +1,19 @@
+@if (control) {
+<div class="group">
+  @if (label()) {
+  <label [for]="inputId()" class="label">{{ label() }}</label>
+  }
+  <input
+    [id]="inputId()"
+    [type]="type()"
+    class="input"
+    [required]="isRequired"
+    [placeholder]="placeholder()"
+    [class.error]="isInvalid"
+    [formControl]="control"
+  />
+  @if (isInvalid) {
+  <shared-validation-error [errors]="control.errors!" />
+  }
+</div>
+}

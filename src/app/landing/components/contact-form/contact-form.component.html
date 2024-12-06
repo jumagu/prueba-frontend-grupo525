@@ -1,0 +1,97 @@
+<form autocomplete="off" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+    <shared-custom-select
+      selectId="sex"
+      class="w-full"
+      label="Sexo"
+      [options]="SEXES"
+      placeholder="Seleccione su sexo"
+      formControlName="sex"
+    />
+
+    <shared-custom-input
+      inputId="birthDate"
+      type="date"
+      label="Fecha de nacimiento"
+      formControlName="birthDate"
+    />
+
+    <shared-custom-input
+      inputId="name"
+      label="Nombre"
+      placeholder="John"
+      formControlName="name"
+    />
+
+    <shared-custom-input
+      inputId="lastName"
+      label="Apellido"
+      placeholder="Doe"
+      formControlName="lastName"
+    />
+
+    <shared-custom-input
+      inputId="email"
+      type="email"
+      label="Email"
+      class="md:col-span-2"
+      placeholder="john@example.com"
+      formControlName="email"
+    />
+
+    <shared-custom-input
+      inputId="address"
+      label="Dirección"
+      class="md:col-span-2"
+      placeholder="Calle 24 Nro..."
+      formControlName="address"
+    />
+
+    <shared-custom-input
+      inputId="house"
+      label="Casa / apartamento"
+      placeholder="Edificio Altavista - Apto 404"
+      formControlName="house"
+    />
+
+    <shared-custom-select
+      selectId="country"
+      label="País"
+      [options]="availableCountries()"
+      placeholder="Seleccione su país"
+      formControlName="country"
+    />
+
+    <shared-custom-select
+      selectId="department"
+      label="Departamento"
+      [options]="availableDepartments()"
+      placeholder="Seleccione su departamento"
+      formControlName="department"
+    />
+
+    <shared-custom-select
+      selectId="city"
+      label="Ciudad"
+      [options]="cities()"
+      placeholder="Seleccione su ciudad"
+      formControlName="city"
+    />
+
+    <shared-custom-textarea
+      textareaId="comments"
+      label="Comentarios"
+      class="md:col-span-2"
+      placeholder="Deje sus comentarios aquí..."
+      formControlName="comment"
+    />
+
+    <div class="flex md:col-span-2">
+      <button
+        class="w-full md:max-w-24 ml-auto appearance-none px-4 py-2 text-white bg-emerald-500 hover:bg-emerald-600 transition-colors"
+      >
+        Enviar
+      </button>
+    </div>
+  </div>
+</form>

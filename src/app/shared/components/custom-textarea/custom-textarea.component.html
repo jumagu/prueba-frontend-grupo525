@@ -1,0 +1,18 @@
+@if (control) {
+<div class="group">
+  @if (label()) {
+  <label [for]="textareaId()" class="label">{{ label() }}</label>
+  }
+  <textarea
+    [id]="textareaId()"
+    class="textarea"
+    [required]="isRequired"
+    [placeholder]="placeholder()"
+    [class.error]="isInvalid"
+    [formControl]="control"
+  ></textarea>
+  @if (isInvalid) {
+  <shared-validation-error [errors]="control.errors!" />
+  }
+</div>
+}

@@ -1,0 +1,27 @@
+@if (control) {
+<div class="group">
+  @if (label()) {
+  <label [for]="selectId()" class="label" [class.required]="isRequired">{{
+    label()
+  }}</label>
+  }
+  <select
+    [id]="selectId()"
+    class="select"
+    [class.error]="isInvalid"
+    [formControl]="control"
+  >
+    @if (placeholder()) {
+    <option value="" [defaultSelected]="true" disabled>
+      {{ placeholder() }}
+    </option>
+    }<!-- -->
+    @for (opt of options(); track opt) {
+    <option [value]="opt">{{ opt }}</option>
+    }
+  </select>
+  @if (isInvalid) {
+  <shared-validation-error [errors]="control.errors!" />
+  }
+</div>
+}

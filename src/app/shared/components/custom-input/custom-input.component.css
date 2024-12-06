@@ -1,0 +1,11 @@
+.label {
+  @apply font-medium text-base block mb-0.5 text-gray-500 group-has-[:focus]:text-black group-has-[:required]:after:content-["*"] group-has-[:required]:after:text-red-500 transition-colors duration-300;
+}
+
+.input {
+  @apply appearance-none w-full h-11 py-2.5 px-3 text-black text-base border border-solid border-gray-500 outline-none focus:border-black disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300;
+}
+
+.input.error {
+  @apply border-red-500 focus:border-black;
+}

@@ -1,0 +1,15 @@
+.label {
+  @apply font-medium text-base block mb-0.5 text-gray-500 group-has-[:focus]:text-black transition-colors duration-300;
+}
+
+.label.required::after {
+  @apply content-["*"] text-red-500;
+}
+
+.select {
+  @apply w-full h-11 py-2.5 px-3 text-black !bg-white text-base border border-solid border-gray-500 outline-none focus:border-black disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300;
+}
+
+.select.error {
+  @apply border-red-500 focus:border-black;
+}

@@ -1,0 +1,132 @@
+<main
+  class="h-screen overflow-auto bg-landscape bg-no-repeat bg-cover bg-center relative"
+>
+  <div class="absolute inset-0 overflow-auto backdrop-blur-md px-4">
+    <h1
+      class="mt-12 mb-4 text-4xl font-semibold text-white uppercase text-center"
+    >
+      Formulario de Contacto
+    </h1>
+
+    <div
+      class="flex flex-col lg:flex-row-reverse max-w-6xl mx-auto mb-12 p-4 lg:py-6 lg:px-12 bg-white"
+    >
+      <section class="lg:w-1/2">
+        <h2 class="text-3xl mb-2 text-emerald-500 font-semibold">Contacto</h2>
+        <landing-contact-form />
+      </section>
+
+      <section class="lg:w-1/2 mt-11">
+        <h2 class="sr-only">Información de contacto</h2>
+        <div>
+          <ul class="flex flex-col gap-3">
+            <li>
+              <a
+                title="Email"
+                href="mailto:consultas@correo.com"
+                class="w-fit flex items-center gap-2 hover:underline"
+              >
+                <i-lucide
+                  size="20"
+                  [img]="MailIcon"
+                  aria-hidden="true"
+                  class="text-emerald-500"
+                />
+                <span class="text-gray-500">{{ "consultas@correo.com" }}</span>
+              </a>
+            </li>
+            <li>
+              <div class="flex items-center gap-2" title="Dirección">
+                <i-lucide
+                  size="20"
+                  [img]="MapPinIcon"
+                  aria-hidden="true"
+                  class="text-emerald-500"
+                />
+                <span class="text-gray-500">{{
+                  "Av. 15 de julio Nro. 8 Bogotá - Colombia"
+                }}</span>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-start gap-2">
+                <i-lucide
+                  size="20"
+                  [img]="PhoneIcon"
+                  class="text-emerald-500"
+                  aria-hidden="true"
+                />
+                <div>
+                  <a
+                    href="tel:+13456-654"
+                    title="Número de teléfono 1"
+                    class="block text-gray-500 hover:underline"
+                    >{{ "(01) 3456-654" }}</a
+                  >
+                  <a
+                    href="tel:+13233-452"
+                    title="Número de teléfono 2"
+                    class="text-gray-500 hover:underline"
+                    >{{ "(01) 3233-452" }}</a
+                  >
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-8 w-fit mx-auto lg:ml-7">
+          <ul class="flex gap-2">
+            <li>
+              <a
+                target="_blank"
+                title="Facebook"
+                href="https://facebook.com"
+                class="block p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 transition-colors"
+              >
+                <span class="sr-only">ir a facebook</span>
+                <i-lucide
+                  size="20"
+                  aria-hidden="true"
+                  class="text-white"
+                  [img]="FacebookIcon"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                title="Twitter"
+                href="https://x.com"
+                class="block p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 transition-colors"
+              >
+                <span class="sr-only">ir a twitter</span>
+                <i-lucide
+                  size="20"
+                  aria-hidden="true"
+                  class="text-white"
+                  [img]="TwitterIcon"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                title="Instagram"
+                href="https://instagram.com"
+                class="block p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 transition-colors"
+              >
+                <span class="sr-only">ir a instagram</span>
+                <i-lucide
+                  size="20"
+                  aria-hidden="true"
+                  class="text-white"
+                  [img]="InstagramIcon"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
